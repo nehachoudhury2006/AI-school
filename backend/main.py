@@ -152,9 +152,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Project paths
 BASE_DIR = Path(__file__).resolve().parent
 FRONTEND_DIR = BASE_DIR.parent / "frontend"
 
+
+# =========================
+# BACKEND API
+# =========================
 
 @app.get("/api/health")
 def health():
@@ -190,8 +195,8 @@ def get_parent(parent_id: str):
 
 
 @app.get("/teachers/{teacher_id}")
-def get_teacher(teacher_id: str):
-    teacher = get_teacher_by_id(teacher_id)
+def get_teacher(student_id: str):
+    teacher = get_teacher_by_id(student_id)
 
     if teacher is None:
         raise HTTPException(
@@ -215,6 +220,10 @@ def get_principal_data():
     return principal
 
 
+# =========================
+# CHAT
+# =========================
+
 class ChatRequest(BaseModel):
     message: str
     role: str
@@ -237,6 +246,10 @@ def chat(request: ChatRequest):
         "response": response,
     }
 
+
+# =========================
+# VOICE CHAT
+# =========================
 
 @app.post("/voice-chat")
 async def voice_chat(
@@ -263,12 +276,15 @@ async def voice_chat(
     }
 
 
-# Serve the frontend from the same FastAPI service
+# =========================
+# FRONTEND
+# =========================
+
 app.mount(
     "/",
     StaticFiles(
         directory=str(FRONTEND_DIR),
-        html=True
+        html=True,
     ),
     name="frontend",
 )
