@@ -131,6 +131,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from app.chat_service import process_chat
@@ -152,13 +153,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Project paths
+# =========================
+# PROJECT PATHS
+# =========================
+
 BASE_DIR = Path(__file__).resolve().parent
 FRONTEND_DIR = BASE_DIR.parent / "frontend"
 
 
 # =========================
-# BACKEND API
+# HEALTH CHECK
 # =========================
 
 @app.get("/api/health")
@@ -167,6 +171,10 @@ def health():
         "message": "AVTAR AI Backend is running!"
     }
 
+
+# =========================
+# STUDENTS
+# =========================
 
 @app.get("/students/{student_id}")
 def get_student(student_id: str):
@@ -181,6 +189,10 @@ def get_student(student_id: str):
     return student
 
 
+# =========================
+# PARENTS
+# =========================
+
 @app.get("/parents/{parent_id}")
 def get_parent(parent_id: str):
     parent = get_parent_by_id(parent_id)
@@ -194,9 +206,13 @@ def get_parent(parent_id: str):
     return parent
 
 
+# =========================
+# TEACHERS
+# =========================
+
 @app.get("/teachers/{teacher_id}")
-def get_teacher(student_id: str):
-    teacher = get_teacher_by_id(student_id)
+def get_teacher(teacher_id: str):
+    teacher = get_teacher_by_id(teacher_id)
 
     if teacher is None:
         raise HTTPException(
@@ -206,6 +222,10 @@ def get_teacher(student_id: str):
 
     return teacher
 
+
+# =========================
+# PRINCIPAL
+# =========================
 
 @app.get("/principal")
 def get_principal_data():
@@ -257,12 +277,12 @@ async def voice_chat(
     role: str = "student",
     user_id: str = "S001",
 ):
-    audio_path = "temp_input_audio.m4a"
+    audio_path = BASE_DIR / "temp_input_audio.m4a"
 
     with open(audio_path, "wb") as file:
         file.write(await audio.read())
 
-    user_text = speech_to_text(audio_path)
+    user_text = speech_to_text(str(audio_path))
 
     ai_response = process_chat(
         message=user_text,
@@ -277,7 +297,24 @@ async def voice_chat(
 
 
 # =========================
-# FRONTEND
+# FRONTEND ROOT
+# =========================
+
+@app.get("/")
+def serve_frontend():
+    index_file = FRONTEND_DIR / "index.html"
+
+    if not index_file.exists():
+        raise HTTPException(
+            status_code=404,
+            detail=f"Frontend index.html not found at {index_file}"
+        )
+
+    return FileResponse(index_file)
+
+
+# =========================
+# FRONTEND STATIC FILES
 # =========================
 
 app.mount(
