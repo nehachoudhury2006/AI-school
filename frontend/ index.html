@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AVTAR AI — Your Learning Companion</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- ==============================
+         PROFILE / WELCOME SCREEN
+    =============================== -->
+
+    <section id="profileScreen" class="profile-screen">
+
+        <header class="brand">
+            <div class="brand-logo">
+                <div class="logo-face">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="brand-text">
+                AVTAR <span>AI</span>
+            </div>
+        </header>
+
+
+        <div class="profile-layout">
+
+            <!-- LEFT PROFILE CARD -->
+
+            <div class="profile-card">
+
+                <div class="progress-dots">
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <h1>Create Your Account</h1>
+
+                <p class="subtitle">
+                    Let's get started with your learning profile
+                </p>
+
+
+                <!-- NAME -->
+
+                <div class="field">
+
+                    <label>
+                        <span class="label-icon">♟</span>
+                        User Name
+                    </label>
+
+                    <input
+                        id="nameInput"
+                        type="text"
+                        placeholder="Enter your full name"
+                    >
+
+                </div>
+
+
+                <!-- GENDER -->
+
+                <div class="field">
+
+                    <label>
+                        <span class="label-icon">♙</span>
+                        Gender
+                    </label>
+
+                    <div class="gender-grid">
+
+                        <button
+                            class="gender-btn"
+                            data-gender="male"
+                        >
+                            <span>♂</span>
+                            Male
+                        </button>
+
+                        <button
+                            class="gender-btn"
+                            data-gender="female"
+                        >
+                            <span>♀</span>
+                            Female
+                        </button>
+
+                        <button
+                            class="gender-btn"
+                            data-gender="other"
+                        >
+                            <span>♙</span>
+                            Other
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ROLE -->
+
+                <div class="field">
+
+                    <label>
+                        <span class="label-icon">◇</span>
+                        Role
+                    </label>
+
+                    <select id="roleInput">
+
+                        <option value="student">
+                            Student
+                        </option>
+
+                        <option value="parent">
+                            Parent
+                        </option>
+
+                        <option value="teacher">
+                            Teacher
+                        </option>
+
+                        <option value="principal">
+                            Principal
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- USER ID -->
+
+                <div class="field">
+
+                    <label>
+                        <span class="label-icon">▣</span>
+                        Roll Number
+                    </label>
+
+                    <input
+                        id="userIdInput"
+                        type="text"
+                        placeholder="Enter your roll number"
+                    >
+
+                </div>
+
+
+                <button
+                    id="continueBtn"
+                    class="continue-btn"
+                >
+                    <span>Continue</span>
+                    <strong>→</strong>
+                </button>
+
+                <p
+                    id="profileError"
+                    class="profile-error"
+                ></p>
+
+                <p class="profile-note">
+                    Your profile is stored securely on this device.
+                </p>
+
+            </div>
+
+
+            <!-- 3D ROBOT -->
+
+            <div class="profile-robot-area">
+
+                <div class="robot-glow"></div>
+
+                <div class="robot-platform">
+
+                    <div class="platform-ring ring-a"></div>
+                    <div class="platform-ring ring-b"></div>
+                    <div class="platform-light"></div>
+
+                </div>
+
+                <div class="robot">
+
+                    <div class="antenna">
+                        <div></div>
+                    </div>
+
+                    <div class="robot-head">
+
+                        <div class="robot-ear left"></div>
+
+                        <div class="robot-screen">
+
+                            <div class="robot-eye"></div>
+                            <div class="robot-eye"></div>
+
+                            <div class="robot-smile">
+                                ◡
+                            </div>
+
+                        </div>
+
+                        <div class="robot-ear right"></div>
+
+                    </div>
+
+                    <div class="robot-neck"></div>
+
+                    <div class="robot-body">
+
+                        <div class="robot-chest">
+                            ✦
+                        </div>
+
+                        <div class="robot-arm left"></div>
+                        <div class="robot-arm right"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         MAIN APPLICATION
+    =============================== -->
+
+    <section
+        id="dashboardScreen"
+        class="dashboard-screen hidden"
+    >
+
+        <!-- SIDEBAR -->
+
+        <aside id="sidebar" class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-logo small">
+                    <div class="logo-face">
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <div>
+                    <strong>
+                        AVTAR <span>AI</span>
+                    </strong>
+
+                    <small>
+                        Your learning companion
+                    </small>
+                </div>
+
+            </div>
+
+
+            <!-- USER -->
+
+            <div class="sidebar-user">
+
+                <div
+                    id="sidebarAvatar"
+                    class="user-avatar"
+                >
+                    A
+                </div>
+
+                <div class="user-details">
+
+                    <strong id="sidebarName">
+                        User
+                    </strong>
+
+                    <span id="sidebarRole">
+                        Student
+                    </span>
+
+                    <small id="sidebarId">
+                        S001
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="nav">
+
+                <button
+                    class="nav-btn active"
+                    data-page="dashboard"
+                >
+                    <span>⌂</span>
+                    Dashboard
+                </button>
+
+                <button
+                    class="nav-btn"
+                    data-page="chat"
+                >
+                    <span>▢</span>
+                    AI Chat
+                </button>
+
+                <button
+                    class="nav-btn"
+                    data-page="history"
+                >
+                    <span>◷</span>
+                    History
+                </button>
+
+                <button
+                    class="nav-btn"
+                    data-page="profile"
+                >
+                    <span>♙</span>
+                    Profile
+                </button>
+
+                <button
+                    class="nav-btn"
+                    data-page="settings"
+                >
+                    <span>⚙</span>
+                    Settings
+                </button>
+
+            </nav>
+
+            <button id="newChatBtn" class="new-chat-btn">
+                ＋ New Chat
+            </button>
+
+            <div class="sidebar-companion" aria-hidden="true">
+
+                <div class="chat-robot-glow"></div>
+
+                <div class="small-robot">
+
+                    <div class="small-antenna"></div>
+
+                    <div class="small-head">
+                        <div></div>
+                        <div></div>
+                    </div>
+
+                    <div class="small-body">✦</div>
+
+                </div>
+
+            </div>
+
+
+            <div class="sidebar-bottom">
+
+                <button
+                    id="logoutBtn"
+                    class="logout-btn"
+                >
+                    ⇥
+                    Logout
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN -->
+
+        <main class="main">
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+                <button
+                    id="menuBtn"
+                    class="menu-btn"
+                >
+                    ☰
+                </button>
+
+                <div class="top-title">
+
+                    <strong id="pageTitle">
+                        AVTAR AI
+                    </strong>
+
+                    <span>
+                        Your intelligent learning companion
+                    </span>
+
+                </div>
+
+
+                <div class="top-actions">
+
+                    <button
+                        id="themeBtn"
+                        class="round-btn"
+                    >
+                        ◐
+                    </button>
+
+                    <div
+                        id="topAvatar"
+                        class="top-avatar"
+                    >
+                        A
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- ==========================
+                 DASHBOARD PAGE
+            =========================== -->
+
+            <section
+                id="dashboardPage"
+                class="page"
+            >
+
+                <div class="welcome-row">
+
+                    <div>
+
+                        <h1>
+                            Hello
+                            <span id="welcomeName">
+                                Neha
+                            </span> 👋
+                        </h1>
+
+                        <p>
+                            How can I assist you today?
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-layout">
+
+                    <!-- CHAT PANEL -->
+
+                    <div class="chat-panel">
+
+                        <div class="chat-header">
+
+                            <div class="chat-brand">
+
+                                <div class="mini-avatar">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        AVTAR AI
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- MESSAGES -->
+
+                        <div
+                            id="messages"
+                            class="messages"
+                        ></div>
+
+
+                        <!-- INPUT -->
+
+                        <div class="chat-input-area">
+
+                            <input
+                                id="messageInput"
+                                type="text"
+                                placeholder="Type your message..."
+                            >
+
+                            <button
+                                id="micBtn"
+                                class="mic-btn"
+                                title="Talk to AVTAR"
+                                aria-label="Talk to AVTAR"
+                            >
+                                <span class="voice-pulse"></span>
+                                <span class="voice-mic">🎙</span>
+                                <span class="voice-ai">✦</span>
+                            </button>
+
+                            <button
+                                id="ttsToggleBtn"
+                                class="toggle active"
+                                type="button"
+                                title="Turn AI voice on or off"
+                                aria-label="Turn AI voice on or off"
+                            >
+                              🔊 Voice ON
+                            </button>
+
+                            <button
+                                id="sendBtn"
+                                class="send-btn"
+                            >
+                                ➤
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================
+                 CHAT PAGE
+            =========================== -->
+
+            <section
+                id="chatPage"
+                class="page hidden"
+            >
+
+                <div class="page-heading">
+
+                    <h1>
+                        AI Chat
+                    </h1>
+
+                    <p>
+                        Talk naturally with AVTAR AI
+                    </p>
+
+                </div>
+
+                <div class="full-chat-card">
+
+                    <div
+                        id="fullMessages"
+                        class="full-messages"
+                    ></div>
+
+                    <div class="full-input">
+
+                        <input
+                            id="fullMessageInput"
+                            type="text"
+                            placeholder="Ask AVTAR anything..."
+                        >
+
+                        <button
+                            id="fullMicBtn"
+                            class="full-mic-btn"
+                            type="button"
+                            title="Talk to AVTAR"
+                            aria-label="Talk to AVTAR"
+                        >
+                            <span class="voice-pulse"></span>
+                            <span class="voice-mic">🎙</span>
+                            <span class="voice-ai">✦</span>
+                        </button>
+
+                        <button
+                            id="fullSendBtn"
+                            type="button"
+                        >
+                            ➤
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================
+                 HISTORY PAGE
+            =========================== -->
+
+            <section
+                id="historyPage"
+                class="page hidden"
+            >
+
+                <div class="page-heading">
+
+                    <h1>
+                        Conversation History
+                    </h1>
+
+                    <p>
+                        Your previous conversations
+                    </p>
+
+                </div>
+
+                <div
+                    id="historyList"
+                    class="history-list"
+                ></div>
+
+            </section>
+
+
+            <!-- ==========================
+                 PROFILE PAGE
+            =========================== -->
+
+            <section
+                id="profilePage"
+                class="page hidden"
+            >
+
+                <div class="page-heading">
+
+                    <h1>
+                        My Profile
+                    </h1>
+
+                    <p>
+                        Your AVTAR AI profile
+                    </p>
+
+                </div>
+
+                <div class="profile-info-card">
+
+                    <div
+                        id="profilePageAvatar"
+                        class="profile-big-avatar"
+                    >
+                        A
+                    </div>
+
+                    <div class="profile-info">
+
+                        <div>
+                            <small>Name</small>
+                            <strong id="profileName">
+                                —
+                            </strong>
+                        </div>
+
+                        <div>
+                            <small>Gender</small>
+                            <strong id="profileGender">
+                                —
+                            </strong>
+                        </div>
+
+                        <div>
+                            <small>Role</small>
+                            <strong id="profileRole">
+                                —
+                            </strong>
+                        </div>
+
+                        <div>
+                            <small>User ID</small>
+                            <strong id="profileId">
+                                —
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================
+                 SETTINGS
+            =========================== -->
+
+            <section
+                id="settingsPage"
+                class="page hidden"
+            >
+
+                <div class="page-heading">
+
+                    <h1>
+                        Settings
+                    </h1>
+
+                    <p>
+                        Customize your AVTAR experience
+                    </p>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <div class="setting">
+
+                        <div>
+                            <strong>
+                                Theme
+                            </strong>
+
+                            <small>
+                                Change your interface colors
+                            </small>
+                        </div>
+
+                        <button
+                            id="openThemeBtn"
+                            class="setting-btn"
+                        >
+                            Change
+                        </button>
+
+                    </div>
+
+                    <div class="setting">
+
+                        <div>
+                            <strong>
+                                Voice Assistant
+                            </strong>
+
+                            <small>
+                                Enable voice interaction
+                            </small>
+                        </div>
+
+                        <button
+                            id="voiceSettingBtn"
+                            class="toggle active"
+                        >
+                            ON
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </section>
+
+
+    <!-- ==============================
+         THEME MODAL
+    =============================== -->
+
+    <div
+        id="themeModal"
+        class="modal hidden"
+    >
+
+        <div class="theme-modal">
+
+            <div class="modal-title">
+
+                <strong>
+                    🎨 Choose Your Theme
+                </strong>
+
+                <button id="closeTheme">
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="themes">
+
+                <button
+                    class="theme-choice active"
+                    data-theme="midnight"
+                >
+                    <span class="theme-color midnight"></span>
+                    Midnight
+                </button>
+
+                <button
+                    class="theme-choice"
+                    data-theme="ocean"
+                >
+                    <span class="theme-color ocean"></span>
+                    Ocean
+                </button>
+
+                <button
+                    class="theme-choice"
+                    data-theme="forest"
+                >
+                    <span class="theme-color forest"></span>
+                    Forest
+                </button>
+
+                <button
+                    class="theme-choice"
+                    data-theme="sunset"
+                >
+                    <span class="theme-color sunset"></span>
+                    Sunset
+                </button>
+
+                <button
+                    class="theme-choice"
+                    data-theme="rose"
+                >
+                    <span class="theme-color rose"></span>
+                    Rose
+                </button>
+
+            </div>
+
+
+            <h4>
+                Color Accent
+            </h4>
+
+            <div class="accents">
+
+                <button
+                    class="accent active"
+                    data-accent="purple"
+                ></button>
+
+                <button
+                    class="accent"
+                    data-accent="blue"
+                ></button>
+
+                <button
+                    class="accent"
+                    data-accent="cyan"
+                ></button>
+
+                <button
+                    class="accent"
+                    data-accent="green"
+                ></button>
+
+                <button
+                    class="accent"
+                    data-accent="orange"
+                ></button>
+
+                <button
+                    class="accent"
+                    data-accent="pink"
+                ></button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         VOICE MODAL
+    =============================== -->
+
+    <div
+        id="voiceModal"
+        class="modal hidden"
+    >
+
+        <div class="voice-card">
+
+            <div class="voice-waves">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+                <div class="voice-core">
+                    🎙
+                </div>
+
+            </div>
+
+            <h2>
+                Listening...
+            </h2>
+
+            <p>
+                Speak to AVTAR AI
+            </p>
+
+            <button id="stopVoice">
+                Stop
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="app.js"></script>
+
+</body>
+</html>

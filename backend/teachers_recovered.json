@@ -1,0 +1,119 @@
+[
+  {
+    "teacher_id": "T001",
+    "name": "Rakesh Sharma",
+    "subject": "Mathematics",
+    "classes_handled": [
+      "10-A",
+      "10-B"
+    ],
+    "students_assigned": [
+      "S001",
+      "S002",
+      "S003",
+      "S004",
+      "S005",
+      "S006",
+      "S007",
+      "S008",
+      "S009",
+      "S010"
+    ]
+  },
+  {
+    "teacher_id": "T002",
+    "name": "Priya Nair",
+    "subject": "Science",
+    "classes_handled": [
+      "10-A",
+      "10-C"
+    ],
+    "students_assigned": [
+      "S001",
+      "S002",
+      "S003",
+      "S004",
+      "S005",
+      "S011",
+      "S012",
+      "S013",
+      "S014",
+      "S015"
+    ]
+  },
+  {
+    "teacher_id": "T003",
+    "name": "Amit Verma",
+    "subject": "English",
+    "classes_handled": [
+      "10-B",
+      "10-D"
+    ],
+    "students_assigned": [
+      "S006",
+      "S007",
+      "S008",
+      "S009",
+      "S010",
+      "S016",
+      "S017",
+      "S018",
+      "S019",
+      "S020"
+    ]
+  },
+  {
+    "teacher_id": "T004",
+    "name": "Sneha Kapoor",
+    "subject": "Computer Science",
+    "classes_handled": [
+      "10-C",
+      "10-D"
+    ],
+    "students_assigned": [
+      "S011",
+      "S012",
+      "S013",
+      "S014",
+      "S015",
+      "S016",
+      "S017",
+      "S018",
+      "S019",
+      "S020"
+    ]
+  },
+  {
+    "teacher_id": "T005",
+    "name": "Vikram Patel",
+    "subject": "Social Science",
+    "classes_handled": [
+      "10-A",
+      "10-B",
+      "10-C",
+      "10-D"
+    ],
+    "students_assigned": [
+      "S001",
+      "S002",
+      "S003",
+      "S004",
+      "S005",
+      "S006",
+      "S007",
+      "S008",
+      "S009",
+      "S010",
+      "S011",
+      "S012",
+      "S013",
+      "S014",
+      "S015",
+      "S016",
+      "S017",
+      "S018",
+      "S019",
+      "S020"
+    ]
+  }
+]

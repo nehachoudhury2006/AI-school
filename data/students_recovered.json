@@ -1,0 +1,462 @@
+[
+  {
+    "student_id": "S001",
+    "name": "Aarav Sharma",
+    "roll_number": 101,
+    "class": "10-A",
+    "attendance": 81,
+    "marks": {
+      "math": 88,
+      "science": 91,
+      "english": 85,
+      "computer": 90,
+      "social_science": 86
+    },
+    "total_marks": 440,
+    "percentage": 88.0,
+    "grade": "A",
+    "rank": 11,
+    "parent_id": "P001",
+    "teacher_ids": [
+      "T001",
+      "T002"
+    ]
+  },
+  {
+    "student_id": "S002",
+    "name": "Anaya Patel",
+    "roll_number": 102,
+    "class": "10-A",
+    "attendance": 94,
+    "marks": {
+      "math": 92,
+      "science": 89,
+      "english": 95,
+      "computer": 91,
+      "social_science": 93
+    },
+    "total_marks": 460,
+    "percentage": 92.0,
+    "grade": "A+",
+    "rank": 6,
+    "parent_id": "P002",
+    "teacher_ids": [
+      "T001",
+      "T002"
+    ]
+  },
+  {
+    "student_id": "S003",
+    "name": "Vihaan Mehta",
+    "roll_number": 103,
+    "class": "10-A",
+    "attendance": 76,
+    "marks": {
+      "math": 81,
+      "science": 84,
+      "english": 79,
+      "computer": 86,
+      "social_science": 82
+    },
+    "total_marks": 412,
+    "percentage": 82.4,
+    "grade": "A",
+    "rank": 16,
+    "parent_id": "P003",
+    "teacher_ids": [
+      "T001",
+      "T002"
+    ]
+  },
+  {
+    "student_id": "S004",
+    "name": "Ishita Verma",
+    "roll_number": 104,
+    "class": "10-A",
+    "attendance": 89,
+    "marks": {
+      "math": 95,
+      "science": 93,
+      "english": 90,
+      "computer": 94,
+      "social_science": 91
+    },
+    "total_marks": 463,
+    "percentage": 92.6,
+    "grade": "A+",
+    "rank": 5,
+    "parent_id": "P004",
+    "teacher_ids": [
+      "T001",
+      "T002"
+    ]
+  },
+  {
+    "student_id": "S005",
+    "name": "Aditya Singh",
+    "roll_number": 105,
+    "class": "10-A",
+    "attendance": 91,
+    "marks": {
+      "math": 86,
+      "science": 88,
+      "english": 84,
+      "computer": 87,
+      "social_science": 89
+    },
+    "total_marks": 434,
+    "percentage": 86.8,
+    "grade": "A",
+    "rank": 12,
+    "parent_id": "P005",
+    "teacher_ids": [
+      "T001",
+      "T002"
+    ]
+  },
+  {
+    "student_id": "S006",
+    "name": "Myra Nair",
+    "roll_number": 106,
+    "class": "10-B",
+    "attendance": 97,
+    "marks": {
+      "math": 93,
+      "science": 96,
+      "english": 94,
+      "computer": 95,
+      "social_science": 97
+    },
+    "total_marks": 475,
+    "percentage": 95.0,
+    "grade": "A+",
+    "rank": 1,
+    "parent_id": "P006",
+    "teacher_ids": [
+      "T001",
+      "T003"
+    ]
+  },
+  {
+    "student_id": "S007",
+    "name": "Arjun Iyer",
+    "roll_number": 107,
+    "class": "10-B",
+    "attendance": 73,
+    "marks": {
+      "math": 78,
+      "science": 80,
+      "english": 75,
+      "computer": 79,
+      "social_science": 81
+    },
+    "total_marks": 393,
+    "percentage": 78.6,
+    "grade": "B",
+    "rank": 20,
+    "parent_id": "P007",
+    "teacher_ids": [
+      "T001",
+      "T003"
+    ]
+  },
+  {
+    "student_id": "S008",
+    "name": "Sara Khan",
+    "roll_number": 108,
+    "class": "10-B",
+    "attendance": 88,
+    "marks": {
+      "math": 90,
+      "science": 87,
+      "english": 92,
+      "computer": 89,
+      "social_science": 91
+    },
+    "total_marks": 449,
+    "percentage": 89.8,
+    "grade": "A",
+    "rank": 9,
+    "parent_id": "P008",
+    "teacher_ids": [
+      "T001",
+      "T003"
+    ]
+  },
+  {
+    "student_id": "S009",
+    "name": "Kabir Joshi",
+    "roll_number": 109,
+    "class": "10-B",
+    "attendance": 84,
+    "marks": {
+      "math": 83,
+      "science": 86,
+      "english": 80,
+      "computer": 85,
+      "social_science": 88
+    },
+    "total_marks": 422,
+    "percentage": 84.4,
+    "grade": "A",
+    "rank": 14,
+    "parent_id": "P009",
+    "teacher_ids": [
+      "T001",
+      "T003"
+    ]
+  },
+  {
+    "student_id": "S010",
+    "name": "Diya Kapoor",
+    "roll_number": 110,
+    "class": "10-B",
+    "attendance": 92,
+    "marks": {
+      "math": 89,
+      "science": 94,
+      "english": 91,
+      "computer": 93,
+      "social_science": 90
+    },
+    "total_marks": 457,
+    "percentage": 91.4,
+    "grade": "A+",
+    "rank": 7,
+    "parent_id": "P010",
+    "teacher_ids": [
+      "T001",
+      "T003"
+    ]
+  },
+  {
+    "student_id": "S011",
+    "name": "Reyansh Das",
+    "roll_number": 111,
+    "class": "10-C",
+    "attendance": 79,
+    "marks": {
+      "math": 82,
+      "science": 77,
+      "english": 85,
+      "computer": 80,
+      "social_science": 83
+    },
+    "total_marks": 407,
+    "percentage": 81.4,
+    "grade": "A",
+    "rank": 17,
+    "parent_id": "P011",
+    "teacher_ids": [
+      "T002",
+      "T004"
+    ]
+  },
+  {
+    "student_id": "S012",
+    "name": "Aanya Gupta",
+    "roll_number": 112,
+    "class": "10-C",
+    "attendance": 96,
+    "marks": {
+      "math": 94,
+      "science": 92,
+      "english": 97,
+      "computer": 95,
+      "social_science": 96
+    },
+    "total_marks": 474,
+    "percentage": 94.8,
+    "grade": "A+",
+    "rank": 2,
+    "parent_id": "P012",
+    "teacher_ids": [
+      "T002",
+      "T004"
+    ]
+  },
+  {
+    "student_id": "S013",
+    "name": "Rohan Kulkarni",
+    "roll_number": 113,
+    "class": "10-C",
+    "attendance": 81,
+    "marks": {
+      "math": 79,
+      "science": 83,
+      "english": 82,
+      "computer": 78,
+      "social_science": 84
+    },
+    "total_marks": 406,
+    "percentage": 81.2,
+    "grade": "A",
+    "rank": 18,
+    "parent_id": "P013",
+    "teacher_ids": [
+      "T002",
+      "T004"
+    ]
+  },
+  {
+    "student_id": "S014",
+    "name": "Meera Shah",
+    "roll_number": 114,
+    "class": "10-C",
+    "attendance": 90,
+    "marks": {
+      "math": 91,
+      "science": 89,
+      "english": 88,
+      "computer": 92,
+      "social_science": 90
+    },
+    "total_marks": 450,
+    "percentage": 90.0,
+    "grade": "A+",
+    "rank": 8,
+    "parent_id": "P014",
+    "teacher_ids": [
+      "T002",
+      "T004"
+    ]
+  },
+  {
+    "student_id": "S015",
+    "name": "Kiaan Rao",
+    "roll_number": 115,
+    "class": "10-C",
+    "attendance": 86,
+    "marks": {
+      "math": 87,
+      "science": 84,
+      "english": 90,
+      "computer": 85,
+      "social_science": 88
+    },
+    "total_marks": 434,
+    "percentage": 86.8,
+    "grade": "A",
+    "rank": 13,
+    "parent_id": "P015",
+    "teacher_ids": [
+      "T002",
+      "T004"
+    ]
+  },
+  {
+    "student_id": "S016",
+    "name": "Navya Reddy",
+    "roll_number": 116,
+    "class": "10-D",
+    "attendance": 93,
+    "marks": {
+      "math": 96,
+      "science": 90,
+      "english": 94,
+      "computer": 92,
+      "social_science": 95
+    },
+    "total_marks": 467,
+    "percentage": 93.4,
+    "grade": "A+",
+    "rank": 4,
+    "parent_id": "P016",
+    "teacher_ids": [
+      "T003",
+      "T004"
+    ]
+  },
+  {
+    "student_id": "S017",
+    "name": "Dhruv Bansal",
+    "roll_number": 117,
+    "class": "10-D",
+    "attendance": 77,
+    "marks": {
+      "math": 75,
+      "science": 81,
+      "english": 78,
+      "computer": 83,
+      "social_science": 80
+    },
+    "total_marks": 397,
+    "percentage": 79.4,
+    "grade": "B",
+    "rank": 19,
+    "parent_id": "P017",
+    "teacher_ids": [
+      "T003",
+      "T004"
+    ]
+  },
+  {
+    "student_id": "S018",
+    "name": "Ira Thomas",
+    "roll_number": 118,
+    "class": "10-D",
+    "attendance": 89,
+    "marks": {
+      "math": 88,
+      "science": 91,
+      "english": 86,
+      "computer": 90,
+      "social_science": 92
+    },
+    "total_marks": 447,
+    "percentage": 89.4,
+    "grade": "A",
+    "rank": 10,
+    "parent_id": "P018",
+    "teacher_ids": [
+      "T003",
+      "T004"
+    ]
+  },
+  {
+    "student_id": "S019",
+    "name": "Yash Malhotra",
+    "roll_number": 119,
+    "class": "10-D",
+    "attendance": 83,
+    "marks": {
+      "math": 85,
+      "science": 80,
+      "english": 84,
+      "computer": 82,
+      "social_science": 85
+    },
+    "total_marks": 416,
+    "percentage": 83.2,
+    "grade": "A",
+    "rank": 15,
+    "parent_id": "P019",
+    "teacher_ids": [
+      "T003",
+      "T004"
+    ]
+  },
+  {
+    "student_id": "S020",
+    "name": "Anvi Menon",
+    "roll_number": 120,
+    "class": "10-D",
+    "attendance": 95,
+    "marks": {
+      "math": 92,
+      "science": 97,
+      "english": 93,
+      "computer": 96,
+      "social_science": 94
+    },
+    "total_marks": 472,
+    "percentage": 94.4,
+    "grade": "A+",
+    "rank": 3,
+    "parent_id": "P020",
+    "teacher_ids": [
+      "T003",
+      "T004"
+    ]
+  }
+]

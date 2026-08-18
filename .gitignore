@@ -1,0 +1,8 @@
+backend/.env
+backend/venv/
+__pycache__/
+*.pyc
+backend/temp_input_audio
+backend/temp_input_audio.m4a
+backend/test_audio.m4a
+git status
