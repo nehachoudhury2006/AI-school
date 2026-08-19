@@ -27,7 +27,9 @@ def chat_with_ollama(message: str):
             ],
             "stream": False,
         },
-        timeout=120,
+        # Do not leave the chat waiting for two minutes if the cloud model is
+        # slow or temporarily unavailable.
+        timeout=25,
     )
 
     response.raise_for_status()

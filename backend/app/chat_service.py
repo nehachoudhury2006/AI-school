@@ -60,7 +60,30 @@ def process_chat(
     role: str,
     user_id: str,
 ):
+    # The frontend may send prior messages for context. The final question is
+    # the part that should decide intent and any school-data lookup.
+    if "\n\nNew user message:" in message:
+        message = message.rsplit("\n\nNew user message:", 1)[1].strip()
+
     message_lower = message.lower().strip()
+
+    # Common conversational questions do not need a database or an external
+    # model call. This gives an immediate, consistent answer.
+    identity_questions = [
+        "who are you", "what are you", "what can you do",
+        "how can you help", "tum kaun ho", "tu kaun hai",
+        "aap kaun ho", "aap kaun hain", "tum kon ho",
+        "तू कौन हो", "तुम कौन हो", "आप कौन हो", "आप कौन हैं",
+    ]
+
+    if any(phrase in message_lower for phrase in identity_questions):
+        return "I'm AVTAR AI, your school learning assistant."
+
+    if message_lower in {"hi", "hello", "hey", "hii"}:
+        return (
+            "Hello! I'm AVTAR AI. How can I help you with your "
+            "school information today?"
+        )
 
     # -------------------------
     # STUDENT
@@ -129,6 +152,8 @@ User question:
 {message}
 
 Answer naturally and accurately.
+Answer only the user's question. Keep the answer to 1-2 short sentences.
+Do not mention the principal, doctor, or any unrelated person unless asked.
 Never invent information.
 Do not expose other students' private data.
 """
@@ -188,6 +213,8 @@ User question:
 {message}
 
 Answer naturally.
+Answer only the user's question in 1-2 short sentences.
+Do not add unrelated details or names.
 Never expose information about another child.
 Never invent data.
 """
@@ -246,6 +273,8 @@ User question:
 {message}
 
 Answer naturally.
+Answer only the user's question in 1-2 short sentences.
+Do not add unrelated details or names.
 Do not expose unrelated private data.
 Do not claim an action succeeded unless the mock service confirms it.
 """
@@ -260,6 +289,25 @@ Do not claim an action succeeded unless the mock service confirms it.
 
         if not principal:
             return "Principal information is unavailable."
+
+        teachers = get_all_teachers()
+
+        # Give principals exact teacher information directly from the school
+        # data instead of relying on the language model to infer it.
+        if "teacher" in message_lower:
+            count_words = [
+                "how many", "count", "total", "kitne", "kitna",
+                "कितने", "कितना",
+            ]
+
+            if any(word in message_lower for word in count_words):
+                return f"There are {len(teachers)} teachers in the school."
+
+            teacher_details = ", ".join(
+                f"{teacher['name']} ({teacher['subject']})"
+                for teacher in teachers
+            )
+            return f"Teachers: {teacher_details}."
 
         analytics = get_school_analytics()
 
@@ -284,6 +332,8 @@ User question:
 {message}
 
 Answer naturally and accurately.
+Answer only the user's question in 1-2 short sentences.
+Do not add unrelated details or names.
 Never invent statistics.
 """
 

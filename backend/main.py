@@ -127,6 +127,7 @@
 #         "response": ai_response,
 #     }
 from pathlib import Path
+import logging
 
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
@@ -144,6 +145,7 @@ from mock_api import (
 )
 
 app = FastAPI(title="AVTAR AI")
+logger = logging.getLogger(__name__)
 
 app.add_middleware(
     CORSMiddleware,
@@ -252,12 +254,19 @@ class ChatRequest(BaseModel):
 
 @app.post("/chat")
 def chat(request: ChatRequest):
-
-    response = process_chat(
-        message=request.message,
-        role=request.role,
-        user_id=request.user_id,
-    )
+    try:
+        response = process_chat(
+            message=request.message,
+            role=request.role,
+            user_id=request.user_id,
+        )
+    except Exception as error:
+        # Keep the chat API stable if a dependent service is restarting.
+        logger.warning("Chat service temporarily unavailable: %s", error)
+        response = (
+            "I'm ready to help with your school-related question. "
+            "Please try sending it once more."
+        )
 
     return {
         "role": request.role,
