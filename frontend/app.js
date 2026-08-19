@@ -1184,9 +1184,8 @@ async function sendChatMessage(
             ? `Previous conversation:\n${previousMessages}\n\nNew user message: ${text}`
             : text;
 
-
-        const response = await fetch(
-    "http://127.0.0.1:8000/chat",
+const response = await fetch(
+    "/chat",
     {
         method: "POST",
         headers: {
