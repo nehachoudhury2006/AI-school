@@ -499,14 +499,18 @@ function loadUser() {
         state.selectedGender =
             user.gender;
 
-        updateUserUI();
+        // Keep the profile screen visible on reload so the user can confirm
+        // their ID before entering the chat. Reuse their previous details to
+        // avoid making them type everything again.
+        nameInput.value = user.name;
+        roleInput.value = user.role;
+        userIdInput.value = user.userId;
 
-        loadConversation();
-
-        // After a completed profile is saved, a refresh returns to the
-        // dashboard instead of showing the initial form again.
-        transitionToDashboard(
-            false
+        genderButtons.forEach(
+            button => button.classList.toggle(
+                "selected",
+                button.dataset.gender === user.gender
+            )
         );
 
     } catch (error) {
@@ -1184,20 +1188,26 @@ async function sendChatMessage(
             ? `Previous conversation:\n${previousMessages}\n\nNew user message: ${text}`
             : text;
 
-const response = await fetch(
-    "/chat",
-    {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            message: requestMessage,
-            role: state.user.role,
-            user_id: state.user.userId
-        })
-    }
-);
+        // Live Server runs the frontend on port 5500, while FastAPI runs on
+        // port 8000. In deployment, both are served from the same origin.
+        const apiBaseUrl = window.location.port === "5500"
+            ? "http://127.0.0.1:8000"
+            : window.location.origin;
+
+        const response = await fetch(
+            `${apiBaseUrl}/chat`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: requestMessage,
+                    role: state.user.role,
+                    user_id: state.user.userId
+                })
+            }
+        );
 
 
         const data = await response.json();
@@ -1230,16 +1240,15 @@ const response = await fetch(
         removeSharedTyping();
 
 
-        console.error(
-            "AVTAR AI backend error:",
-            error
-        );
-
+        // Keep the chat usable if the backend is restarting or unavailable.
+        const fallbackResponse = generateResponse(text);
 
         addSharedMessage(
-            "I couldn't connect to the AVTAR AI server. Please make sure the FastAPI backend is running.",
+            fallbackResponse,
             "ai"
         );
+
+        speakText(fallbackResponse);
     }
 }
 /* =========================================================
