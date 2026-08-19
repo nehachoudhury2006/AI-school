@@ -42,6 +42,8 @@ const state = {
     accent: "purple"
 };
 
+const CHAT_SESSION_KEY = "avtarChatSession";
+
 
 /* =========================================================
    ELEMENTS
@@ -442,6 +444,10 @@ function createProfile() {
 
     saveUser();
 
+    // This is intentionally tab-scoped. A refresh keeps the current chat,
+    // while a fresh/direct URL visit opens the profile screen.
+    sessionStorage.setItem(CHAT_SESSION_KEY, "active");
+
     updateUserUI();
 
     loadConversation();
@@ -533,7 +539,8 @@ function loadUser() {
         state.selectedGender =
             user.gender;
 
-        // A saved profile should reopen directly in the active chat.
+        // Keep saved details available on the profile page. Resume the chat
+        // only when this same browser tab was refreshed.
         nameInput.value = user.name;
         roleInput.value = user.role;
         userIdInput.value = user.userId;
@@ -545,10 +552,17 @@ function loadUser() {
             )
         );
 
-        updateUserUI();
-        loadConversation();
-        transitionToDashboard(false);
-        showPage("chat");
+        const navigation = performance.getEntriesByType("navigation")[0];
+        const isRefresh = navigation?.type === "reload";
+        const hasActiveChatSession =
+            sessionStorage.getItem(CHAT_SESSION_KEY) === "active";
+
+        if (isRefresh && hasActiveChatSession) {
+            updateUserUI();
+            loadConversation();
+            transitionToDashboard(false);
+            showPage("chat");
+        }
 
     } catch (error) {
 
@@ -1770,6 +1784,8 @@ function logout() {
     localStorage.removeItem(
         "avtarUser"
     );
+
+    sessionStorage.removeItem(CHAT_SESSION_KEY);
 
 
     state.user = {
