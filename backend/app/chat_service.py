@@ -6,7 +6,9 @@ from mock_api import (
     get_student_by_name,
     get_student_by_roll_number,
     get_parent_by_id,
+    get_parent_by_name,
     get_teacher_by_id,
+    get_teacher_by_name,
     get_principal,
     get_school_analytics,
     mark_student_absent,
@@ -161,13 +163,17 @@ def resolve_role(role: str, user_id: str) -> str:
 def get_logged_in_identity(role: str, user_id: str):
     """Return a deterministic identity answer from the authorized account."""
     if role == "student":
-        student = get_student_by_id(user_id) or get_student_by_roll_number(user_id)
+        student = (
+            get_student_by_id(user_id)
+            or get_student_by_roll_number(user_id)
+            or get_student_by_name(user_id)
+        )
         if not student:
             return "I could not find your student account."
         return f"You are {student['name']}, a student in class {student['class']}."
 
     if role == "parent":
-        parent = get_parent_by_id(user_id)
+        parent = get_parent_by_id(user_id) or get_parent_by_name(user_id)
         if not parent:
             return "I could not find your parent account."
         return (
@@ -176,7 +182,7 @@ def get_logged_in_identity(role: str, user_id: str):
         )
 
     if role == "teacher":
-        teacher = get_teacher_by_id(user_id)
+        teacher = get_teacher_by_id(user_id) or get_teacher_by_name(user_id)
         if not teacher:
             return "I could not find your teacher account."
         return f"You are {teacher['name']}, the {teacher['subject']} teacher."
@@ -254,6 +260,7 @@ def process_chat(
         student = (
             get_student_by_id(user_id)
             or get_student_by_roll_number(user_id)
+            or get_student_by_name(user_id)
         )
 
         if not student:
@@ -352,7 +359,7 @@ Response standards:
     # PARENT
     # -------------------------
     if role == "parent":
-        parent = get_parent_by_id(user_id)
+        parent = get_parent_by_id(user_id) or get_parent_by_name(user_id)
 
         if not parent:
             return "I could not find your parent account."
@@ -438,7 +445,7 @@ Response standards:
     # TEACHER
     # -------------------------
     if role == "teacher":
-        teacher = get_teacher_by_id(user_id)
+        teacher = get_teacher_by_id(user_id) or get_teacher_by_name(user_id)
 
         if not teacher:
             return "I could not find your teacher account."

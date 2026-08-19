@@ -15,6 +15,11 @@ def _load_records(filename):
         return json.load(data_file)
 
 
+def _normalize_identifier(value):
+    """Match account IDs regardless of typing case or surrounding spaces."""
+    return str(value).strip().upper()
+
+
 STUDENTS = _load_records("students_recovered.json")
 PARENTS = _load_records("parents_recovered.json")
 PRINCIPALS = _load_records("principals_recovered.json")
@@ -37,6 +42,7 @@ def _read(mongo_query, local_query):
 
 
 def get_student_by_id(student_id):
+    student_id = _normalize_identifier(student_id)
     return _read(
         lambda: db.students.find_one({"student_id": student_id}, {"_id": 0}),
         lambda: next(
@@ -61,6 +67,7 @@ def get_student_by_name(name):
 
 
 def get_student_by_roll_number(roll_number):
+    roll_number = str(roll_number).strip()
     return _read(
         lambda: db.students.find_one({"roll_number": roll_number}, {"_id": 0}),
         lambda: next(
@@ -75,6 +82,7 @@ def get_student_by_roll_number(roll_number):
 
 
 def get_parent_by_id(parent_id):
+    parent_id = _normalize_identifier(parent_id)
     return _read(
         lambda: db.parents.find_one({"parent_id": parent_id}, {"_id": 0}),
         lambda: next(
@@ -84,11 +92,42 @@ def get_parent_by_id(parent_id):
     )
 
 
+def get_parent_by_name(name):
+    normalized_name = name.strip().lower()
+    return _read(
+        lambda: db.parents.find_one(
+            {"parent_name": {"$regex": f"^{name.strip()}$", "$options": "i"}},
+            {"_id": 0},
+        ),
+        lambda: next(
+            (parent for parent in PARENTS
+             if parent["parent_name"].lower() == normalized_name),
+            None,
+        ),
+    )
+
+
 def get_teacher_by_id(teacher_id):
+    teacher_id = _normalize_identifier(teacher_id)
     return _read(
         lambda: db.teachers.find_one({"teacher_id": teacher_id}, {"_id": 0}),
         lambda: next(
             (teacher for teacher in TEACHERS if teacher["teacher_id"] == teacher_id),
+            None,
+        ),
+    )
+
+
+def get_teacher_by_name(name):
+    normalized_name = name.strip().lower()
+    return _read(
+        lambda: db.teachers.find_one(
+            {"name": {"$regex": f"^{name.strip()}$", "$options": "i"}},
+            {"_id": 0},
+        ),
+        lambda: next(
+            (teacher for teacher in TEACHERS
+             if teacher["name"].lower() == normalized_name),
             None,
         ),
     )
