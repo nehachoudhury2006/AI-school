@@ -149,6 +149,41 @@ def resolve_role(role: str, user_id: str) -> str:
     return normalized_role
 
 
+def get_logged_in_identity(role: str, user_id: str):
+    """Return a deterministic identity answer from the authorized account."""
+    if role == "student":
+        student = get_student_by_id(user_id) or get_student_by_roll_number(user_id)
+        if not student:
+            return "I could not find your student account."
+        return f"You are {student['name']}, a student in class {student['class']}."
+
+    if role == "parent":
+        parent = get_parent_by_id(user_id)
+        if not parent:
+            return "I could not find your parent account."
+        return (
+            f"You are {parent['parent_name']}, the "
+            f"{parent['relationship'].lower()} of {parent['child_name']}."
+        )
+
+    if role == "teacher":
+        teacher = get_teacher_by_id(user_id)
+        if not teacher:
+            return "I could not find your teacher account."
+        return f"You are {teacher['name']}, the {teacher['subject']} teacher."
+
+    if role == "principal":
+        principal = get_principal()
+        if not principal:
+            return "Principal information is unavailable."
+        return (
+            f"You are {principal['name']}, the principal of "
+            f"{principal['school_name']}."
+        )
+
+    return "I could not identify your account role."
+
+
 def process_chat(
     message: str,
     role: str,
@@ -186,6 +221,14 @@ def process_chat(
             "Hello! I'm AVTAR AI. How can I help you with your "
             "school information today?"
         )
+
+    # These must run before general knowledge routing. They refer to the
+    # logged-in account and therefore require exact authorized data, not an
+    # Ollama inference.
+    if is_self_question(message_lower):
+        if "role" in message_lower or "रोल" in message_lower:
+            return f"You are a {role}."
+        return get_logged_in_identity(role, user_id)
 
     # General knowledge must not be restricted by the privacy rules applied
     # to school records. Role-specific paths below are used only when a
