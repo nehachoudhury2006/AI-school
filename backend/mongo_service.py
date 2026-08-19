@@ -8,7 +8,11 @@ load_dotenv()
 MONGODB_URI = os.getenv("MONGODB_URI") or os.getenv("MNGODB_URI")
 MONGODB_DATABASE = os.getenv("MONGODB_DATABASE", "APTRA_AI")
 
-client = MongoClient(MONGODB_URI)
+client = MongoClient(
+    MONGODB_URI,
+    serverSelectionTimeoutMS=2500,
+    connectTimeoutMS=2500,
+)
 
 db = client[MONGODB_DATABASE]
 

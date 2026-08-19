@@ -6,7 +6,7 @@
 
     <title>AVTAR AI — Your Learning Companion</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=theme-2">
 </head>
 
 <body>
@@ -529,12 +529,12 @@
 
                             <button
                                 id="ttsToggleBtn"
-                                class="toggle active"
+                                class="toggle"
                                 type="button"
                                 title="Turn AI voice on or off"
                                 aria-label="Turn AI voice on or off"
                             >
-                              🔊 Voice ON
+                              🔇 Voice OFF
                             </button>
 
                             <button
@@ -600,6 +600,16 @@
                             <span class="voice-pulse"></span>
                             <span class="voice-mic">🎙</span>
                             <span class="voice-ai">✦</span>
+                        </button>
+
+                        <button
+                            id="fullTtsToggleBtn"
+                            class="toggle"
+                            type="button"
+                            title="Turn voice input and AI voice on or off"
+                            aria-label="Turn voice input and AI voice on or off"
+                        >
+                            🔇 Voice OFF
                         </button>
 
                         <button

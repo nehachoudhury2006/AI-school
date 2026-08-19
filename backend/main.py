@@ -255,6 +255,11 @@ class ChatRequest(BaseModel):
 @app.post("/chat")
 def chat(request: ChatRequest):
     try:
+        logger.info(
+            "Chat request received for role=%s, user_id=%s",
+            request.role,
+            request.user_id,
+        )
         response = process_chat(
             message=request.message,
             role=request.role,

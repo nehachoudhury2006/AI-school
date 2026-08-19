@@ -2873,6 +2873,72 @@ body::before {
    ACCENT THEMES
 ========================================================= */
 
+/* Theme choices change the base palette; accent choices only change buttons
+   and highlights. Keeping these separate makes every modal option visible. */
+body.theme-ocean {
+    --bg: #041827;
+    --bg-2: #08283d;
+    --panel: rgba(8, 39, 60, 0.84);
+    --panel-2: rgba(12, 54, 78, 0.94);
+    --border: rgba(81, 210, 255, 0.25);
+    --text: #effbff;
+    --muted: #9fc3d4;
+    --muted-2: #7094a8;
+    background: linear-gradient(135deg, #03111d, #06283c 55%, #041825);
+}
+
+body.theme-ocean .dashboard-screen { background: linear-gradient(135deg, #03111d, #06283c 55%, #041825); }
+body.theme-ocean .sidebar { background: linear-gradient(180deg, #062238, #03131f); }
+body.theme-ocean .profile-card { background: linear-gradient(145deg, #0b3854, #061c2d); }
+
+body.theme-forest {
+    --bg: #071b13;
+    --bg-2: #0b2d20;
+    --panel: rgba(11, 45, 31, 0.84);
+    --panel-2: rgba(16, 62, 42, 0.94);
+    --border: rgba(111, 222, 146, 0.24);
+    --text: #f0fff5;
+    --muted: #abcbb7;
+    --muted-2: #769b84;
+    background: linear-gradient(135deg, #06140e, #103522 55%, #071b13);
+}
+
+body.theme-forest .dashboard-screen { background: linear-gradient(135deg, #06140e, #103522 55%, #071b13); }
+body.theme-forest .sidebar { background: linear-gradient(180deg, #0a2a1b, #06150e); }
+body.theme-forest .profile-card { background: linear-gradient(145deg, #15452c, #092416); }
+
+body.theme-sunset {
+    --bg: #24100f;
+    --bg-2: #3b1819;
+    --panel: rgba(58, 25, 27, 0.84);
+    --panel-2: rgba(78, 31, 32, 0.94);
+    --border: rgba(255, 158, 104, 0.25);
+    --text: #fff7f1;
+    --muted: #e0b8aa;
+    --muted-2: #ad8178;
+    background: linear-gradient(135deg, #210e10, #4a1e22 55%, #2d1012);
+}
+
+body.theme-sunset .dashboard-screen { background: linear-gradient(135deg, #210e10, #4a1e22 55%, #2d1012); }
+body.theme-sunset .sidebar { background: linear-gradient(180deg, #3a171a, #210d0f); }
+body.theme-sunset .profile-card { background: linear-gradient(145deg, #5c292b, #2b1114); }
+
+body.theme-rose {
+    --bg: #210d21;
+    --bg-2: #351334;
+    --panel: rgba(54, 20, 53, 0.84);
+    --panel-2: rgba(76, 27, 73, 0.94);
+    --border: rgba(255, 137, 222, 0.25);
+    --text: #fff4fd;
+    --muted: #dfb6d9;
+    --muted-2: #ac7fa5;
+    background: linear-gradient(135deg, #200d21, #481846 55%, #2a0e2a);
+}
+
+body.theme-rose .dashboard-screen { background: linear-gradient(135deg, #200d21, #481846 55%, #2a0e2a); }
+body.theme-rose .sidebar { background: linear-gradient(180deg, #371435, #1e0b1e); }
+body.theme-rose .profile-card { background: linear-gradient(145deg, #55204f, #280e27); }
+
 body.accent-blue {
     --primary: #3e83ff;
     --primary-2: #3cc8ff;

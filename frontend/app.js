@@ -31,7 +31,11 @@ const state = {
 
     isListening: false,
 
-    voiceEnabled: true,
+    voiceEnabled: false,
+
+    voiceInput: null,
+
+    voiceContainer: null,
 
     theme: "midnight",
 
@@ -128,6 +132,11 @@ const fullSendBtn =
 const fullMicBtn =
     document.getElementById(
         "fullMicBtn"
+    );
+
+const fullTtsToggleBtn =
+    document.getElementById(
+        "fullTtsToggleBtn"
     );
 
 const historyList =
@@ -258,6 +267,8 @@ function initialize() {
 
     setupProfile();
 
+    updateUserIdHint();
+
     setupNavigation();
 
     setupChat();
@@ -358,6 +369,11 @@ function setupProfile() {
         }
     );
 
+    roleInput.addEventListener(
+        "change",
+        updateUserIdHint
+    );
+
 }
 
 
@@ -435,6 +451,24 @@ function createProfile() {
 }
 
 
+function updateUserIdHint() {
+
+    const role = roleInput.value;
+
+    const hints = {
+        student: ["Roll Number", "Enter your roll number (for example, 101)"],
+        parent: ["Parent ID", "Enter your parent ID (for example, P001)"],
+        teacher: ["Teacher ID", "Enter your teacher ID (for example, T001)"],
+        principal: ["Principal ID", "Enter your principal ID (for example, PR001)"]
+    };
+
+    const [label, placeholder] = hints[role];
+    userIdInput.previousElementSibling.textContent = label;
+    userIdInput.placeholder = placeholder;
+
+}
+
+
 function showError(message) {
 
     profileError.textContent =
@@ -499,9 +533,7 @@ function loadUser() {
         state.selectedGender =
             user.gender;
 
-        // Keep the profile screen visible on reload so the user can confirm
-        // their ID before entering the chat. Reuse their previous details to
-        // avoid making them type everything again.
+        // A saved profile should reopen directly in the active chat.
         nameInput.value = user.name;
         roleInput.value = user.role;
         userIdInput.value = user.userId;
@@ -512,6 +544,11 @@ function loadUser() {
                 button.dataset.gender === user.gender
             )
         );
+
+        updateUserUI();
+        loadConversation();
+        transitionToDashboard(false);
+        showPage("chat");
 
     } catch (error) {
 
@@ -1259,7 +1296,7 @@ function setupVoice() {
 
     micBtn.addEventListener(
         "click",
-        toggleVoice
+        () => toggleVoice(messageInput, messages)
     );
 
 
@@ -1269,61 +1306,43 @@ function setupVoice() {
     );
 
 
-    voiceSettingBtn.addEventListener(
-        "click",
-        () => {
-
-            state.voiceEnabled =
-                !state.voiceEnabled;
-
-
-            voiceSettingBtn.textContent =
-                state.voiceEnabled
-                    ? "ON"
-                    : "OFF";
-
-
-            voiceSettingBtn.classList.toggle(
-                "active",
-                state.voiceEnabled
-            );
-
-        }
+    [voiceSettingBtn, ttsToggleBtn, fullTtsToggleBtn].forEach(
+        button => button?.addEventListener(
+            "click",
+            () => setVoiceEnabled(!state.voiceEnabled)
+        )
     );
 
-
-    ttsToggleBtn.addEventListener(
-        "click",
-        () => {
-
-            state.voiceEnabled =
-                !state.voiceEnabled;
-
-
-            ttsToggleBtn.textContent =
-                state.voiceEnabled
-                    ? "🔊 Voice ON"
-                    : "🔇 Voice OFF";
-
-
-            ttsToggleBtn.classList.toggle(
-                "active",
-                state.voiceEnabled
-            );
-
-
-            if (!state.voiceEnabled) {
-
-                window.speechSynthesis.cancel();
-
-            }
-
-        }
+    setVoiceEnabled(
+        localStorage.getItem("avtarVoiceEnabled") === "true"
     );
 
 }
 
-function toggleVoice() {
+
+function setVoiceEnabled(enabled) {
+
+    state.voiceEnabled = enabled;
+
+    voiceSettingBtn.textContent = enabled ? "ON" : "OFF";
+    voiceSettingBtn.classList.toggle("active", enabled);
+
+    [ttsToggleBtn, fullTtsToggleBtn].forEach(button => {
+        if (!button) return;
+        button.textContent = enabled ? "🔊 Voice ON" : "🔇 Voice OFF";
+        button.classList.toggle("active", enabled);
+    });
+
+    localStorage.setItem("avtarVoiceEnabled", String(enabled));
+
+    if (!enabled) {
+        window.speechSynthesis.cancel();
+        stopListening();
+    }
+
+}
+
+function toggleVoice(input = messageInput, container = messages) {
 
     if (!state.voiceEnabled) {
         return;
@@ -1332,6 +1351,8 @@ function toggleVoice() {
     if (state.isListening) {
         stopListening();
     } else {
+        state.voiceInput = input;
+        state.voiceContainer = container;
         startListening();
     }
 }
@@ -1346,9 +1367,7 @@ function startListening() {
         "recording"
     );
 
-    fullMicBtn.classList.add(
-        "recording"
-    );
+    fullMicBtn?.classList.add("recording");
 
     voiceModal.classList.remove(
         "hidden"
@@ -1382,9 +1401,7 @@ function stopListening() {
         "recording"
     );
 
-    fullMicBtn.classList.remove(
-        "recording"
-    );
+    fullMicBtn?.classList.remove("recording");
 
 
     voiceModal.classList.add(
@@ -1445,16 +1462,18 @@ function startBrowserSpeech() {
                     .transcript;
 
 
-            messageInput.value =
-                transcript;
+            const input = state.voiceInput || messageInput;
+            const container = state.voiceContainer || messages;
+
+            input.value = transcript;
 
 
             stopListening();
 
 
             sendChatMessage(
-                messageInput,
-                messages
+                input,
+                container
             );
 
         };
@@ -1918,7 +1937,7 @@ function setupFullChat() {
     if (fullMicBtn) {
         fullMicBtn.addEventListener(
             "click",
-            toggleVoice
+            () => toggleVoice(fullMessageInput, fullMessages)
         );
     }
 
